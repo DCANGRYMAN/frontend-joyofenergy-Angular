@@ -1,10 +1,13 @@
+import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
-import { ApiService } from "src/app/shared/services/api.service";
+import { ApiService } from "../../shared/services/api.service";
 
 @Component({
   selector: "app-footer",
   templateUrl: "./footer.component.html",
   styleUrls: ["./footer.component.scss"],
+  standalone: true,
+  imports: [CommonModule],
 })
 export class FooterComponent {
   totalConsumption = 0;
