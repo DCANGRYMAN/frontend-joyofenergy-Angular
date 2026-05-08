@@ -7,13 +7,15 @@ import { MainComponent } from './components/main/main.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     SideBarComponent,
-    ChartComponent
+    ChartComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

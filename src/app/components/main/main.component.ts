@@ -1,29 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { Data } from 'src/app/shared/models/dataModel';
-import { ApiService } from 'src/app/shared/services/api.service';
+import { Component, OnInit } from "@angular/core";
+import { Data } from "src/app/shared/models/dataModel";
+import { ApiService } from "src/app/shared/services/api.service";
 import { renderChart } from "../../shared/utils/chart";
-import { groupByDay, sortByTime, getReadings } from "../../shared/utils/reading";
+import {
+  groupByDay,
+  sortByTime,
+  getReadings,
+} from "../../shared/utils/reading";
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  selector: "app-main",
+  templateUrl: "./main.component.html",
+  styleUrls: ["./main.component.scss"],
 })
-export class MainComponent implements OnInit {
+export class MainComponent {
   chartData: Data[] = [];
-  constructor() { 
+
+  constructor(private api: ApiService) {
     this.createChart();
   }
 
-  ngOnInit(): void {
-     
-  }
 
   async createChart() {
     const readings = await getReadings();
-    const containerId = "chart";
+    const grouped = sortByTime(groupByDay(readings)).slice(-30);
     this.chartData = readings;
-    renderChart(containerId, sortByTime(groupByDay(readings)).slice(-30));
+    renderChart("chart", grouped);
+    this.api.grouped.next(grouped);
   }
-
 }
