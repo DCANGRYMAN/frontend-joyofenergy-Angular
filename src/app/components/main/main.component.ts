@@ -2,13 +2,18 @@ import { Component, signal, computed } from "@angular/core";
 import { Data } from "src/app/shared/models/dataModel";
 import { ApiService } from "src/app/shared/services/api.service";
 import { renderChart } from "../../shared/utils/chart";
-import { groupByDay, sortByTime, getReadings } from "../../shared/utils/reading";
+import {
+  groupByDay,
+  sortByTime,
+  getReadings,
+} from "../../shared/utils/reading";
 import { FooterComponent } from "../footer/footer.component";
 import { SideBarComponent } from "../side-bar/side-bar.component";
 import { ChartComponent } from "../chart/chart.component";
 import { CommonModule } from "@angular/common";
+import { ThemeService } from "src/app/shared/services/theme.service";
 
-type FilterType = 'daily' | 'weekly' | 'monthly' | 'annual';
+type FilterType = "daily" | "weekly" | "monthly" | "annual";
 
 @Component({
   selector: "app-main",
@@ -19,7 +24,7 @@ type FilterType = 'daily' | 'weekly' | 'monthly' | 'annual';
 })
 export class MainComponent {
   allReadings = signal<Data[]>([]);
-  activeFilter = signal<FilterType>('monthly');
+  activeFilter = signal<FilterType>("monthly");
   filteredData = computed(() => {
     const readings = this.allReadings();
     const filter = this.activeFilter();
@@ -36,13 +41,16 @@ export class MainComponent {
   });
 
   readonly filters: { label: string; value: FilterType }[] = [
-    { label: 'Daily', value: 'daily' },
-    { label: 'Weekly', value: 'weekly' },
-    { label: 'Monthly', value: 'monthly' },
-    { label: 'Annual', value: 'annual' },
+    { label: "Daily", value: "daily" },
+    { label: "Weekly", value: "weekly" },
+    { label: "Monthly", value: "monthly" },
+    { label: "Annual", value: "annual" },
   ];
 
-  constructor(private api: ApiService) {
+  constructor(
+    private api: ApiService,
+    public theme: ThemeService,
+  ) {
     this.loadData();
   }
 

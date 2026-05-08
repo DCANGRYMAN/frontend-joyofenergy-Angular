@@ -1,3 +1,10 @@
+body.dark {
+  background-color: #1a1a2e;
+  color: #e0e0e0;
 
-
-
+  .bg-very-light-grey { background-color: #16213e !important; }
+  .bg-white            { background-color: #0f3460 !important; }
+  .darkgray            { color: #e0e0e0 !important; }
+  .shadow-2            { box-shadow: 0 2px 8px rgba(0,0,0,0.4) !important; }
+  .border-grey         { border-color: #2a2a4a !important; }
+}
