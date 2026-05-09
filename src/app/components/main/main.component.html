@@ -5,14 +5,14 @@
     <h1 class="regular darkgray line-height-1 mb3">Energy consumption</h1>
 
     <section class="mb3 filters">
-      @for (filter of filters; track filter.value) {
+      @for (filter of api.filters; track filter.value) {
         <button
           (click)="setFilter(filter.value)"
           class="h5 inline-block shadow-2 pl2 pr2 pt1 pb1 roundedMore border-grey bold"
-          [class.bg-blue]="activeFilter() === filter.value"
-          [class.white]="activeFilter() === filter.value"
-          [class.bg-white]="activeFilter() !== filter.value"
-          [class.darkgray]="activeFilter() !== filter.value"
+          [class.bg-blue]="api.activeFilter() === filter.value"
+          [class.white]="api.activeFilter() === filter.value"
+          [class.bg-white]="api.activeFilter() !== filter.value"
+          [class.darkgray]="api.activeFilter() !== filter.value"
         >
           {{ filter.label }}
         </button>
@@ -20,7 +20,7 @@
     </section>
 
     <section class="chartHeight mb4">
-      <app-chart [chartData]="filteredData()"></app-chart>
+      <app-chart [chartData]="api.filteredData()"></app-chart>
     </section>
 
     <app-footer></app-footer>
