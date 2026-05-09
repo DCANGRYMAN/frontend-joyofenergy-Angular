@@ -1,27 +1,58 @@
-# AngularFrontendDeveloperJoyofenergy
+# Angular Frontend - Joy of Energy
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.1.
+Built with Angular 21.
 
-## Development server
+## Getting Started
 
-Run `npm install` `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Install dependencies
+```bash
+npm install
+```
 
-## Code scaffolding
+### Run the mock server
+```bash
+npm run server
+```
+> Runs on `http://localhost:3000`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Run the app
+```bash
+ng serve
+```
+> Navigate to `http://localhost:4200` — the app reloads automatically on file changes.
+
+### Run both simultaneously
+Open two terminals and run each command separately.
+
+---
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+ng build
+```
+Build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Code scaffolding
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+ng generate component component-name
+ng generate service|directive|pipe|guard|interface|enum
+```
 
-## Running end-to-end tests
+## Tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+# Unit tests
+ng test
+
+# End-to-end tests
+ng e2e
+```
+
+---
 
 ## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- [Angular CLI docs](https://angular.dev/cli)
+- `ng help`
