@@ -1,2 +1,25 @@
-node_modules
-.angular
+# dependencies
+/node_modules
+server/node_modules
+
+# build
+/dist
+/out-tsc
+
+# angular
+/.angular
+
+# logs
+npm-debug.log
+yarn-error.log
+
+# IDE
+.vscode/
+.idea/
+
+# system
+.DS_Store
+Thumbs.db
+
+# coverage
+/coverage

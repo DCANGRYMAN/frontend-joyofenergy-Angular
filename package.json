@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "ng test --code-coverage",
     "server": "node server/server.js"
   },
   "private": true,
@@ -30,8 +30,7 @@
     "@angular/cli": "^20.2.2",
     "@angular/compiler-cli": "^20.2.2",
     "@types/chart.js": "^2.9.41",
-    "@types/jasmine": "^5.1.8",
-    "@types/mocha": "^10.0.10",
+    "@types/jasmine": "^5.1.15",
     "jasmine-core": "^5.12.0",
     "karma": "^6.4.4",
     "karma-chrome-launcher": "^3.2.0",

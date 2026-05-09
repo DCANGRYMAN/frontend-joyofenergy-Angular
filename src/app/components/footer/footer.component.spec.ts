@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { BehaviorSubject } from "rxjs";
-
 import { FooterComponent } from "./footer.component";
 import { ApiService } from "src/app/shared/services/api.service";
 
@@ -20,7 +19,7 @@ describe("FooterComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FooterComponent],
+      imports: [FooterComponent],
       providers: [
         {
           provide: ApiService,
@@ -31,7 +30,6 @@ describe("FooterComponent", () => {
 
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
-
     fixture.detectChanges();
   });
 
