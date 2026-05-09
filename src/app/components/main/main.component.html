@@ -2,17 +2,7 @@
   <app-side-bar></app-side-bar>
 
   <div class="bg-very-light-grey p3 flex-auto overflow-auto">
-
-    <div class="flex justify-between items-center mb3">
-      <h1 class="regular darkgray line-height-1 m0">Energy consumption</h1>
-      <button (click)="theme.toggle()" class="theme-toggle circle border-none">
-        @if (theme.isDark()) {
-          <span>L</span>
-        } @else {
-          <span>D</span>
-        }
-      </button>
-    </div>
+    <h1 class="regular darkgray line-height-1 mb3">Energy consumption</h1>
 
     <section class="mb3 filters">
       @for (filter of filters; track filter.value) {

@@ -11,7 +11,6 @@ import { FooterComponent } from "../footer/footer.component";
 import { SideBarComponent } from "../side-bar/side-bar.component";
 import { ChartComponent } from "../chart/chart.component";
 import { CommonModule } from "@angular/common";
-import { ThemeService } from "src/app/shared/services/theme.service";
 
 type FilterType = "daily" | "weekly" | "monthly" | "annual";
 
@@ -44,13 +43,9 @@ export class MainComponent {
     { label: "Daily", value: "daily" },
     { label: "Weekly", value: "weekly" },
     { label: "Monthly", value: "monthly" },
-    { label: "Annual", value: "annual" },
   ];
 
-  constructor(
-    private api: ApiService,
-    public theme: ThemeService,
-  ) {
+  constructor(private api: ApiService) {
     this.loadData();
   }
 
