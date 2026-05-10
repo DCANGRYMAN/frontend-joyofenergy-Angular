@@ -25,7 +25,7 @@ const getReadings = (length = 1200) => {
 
 const getCurrentData = () => {
   const now = new Date();
-  const hour = now.getHours();
+  const hour   = now.getHours();
   const dayFactor = Math.sin((hour - 6) * Math.PI / 12) * 0.5 + 0.5;
 
   const currentUsage = devices.reduce((total, device) => {
@@ -33,7 +33,7 @@ const getCurrentData = () => {
     return total + device.baseUsage * variation * dayFactor;
   }, 0);
 
-  const solarProduction = Math.sin((hour - 6) * Math.PI / 12) * 5.8;
+  const solarProduction = Math.max(0, Math.sin((hour - 6) * Math.PI / 12) * 5.8);
   const fedIntoGrid = Math.max(0, solarProduction - currentUsage);
 
   return {

@@ -4,13 +4,13 @@ import { ApiService } from "../../shared/services/api.service";
 import { map } from "rxjs/operators";
 
 @Component({
-  selector: "app-footer",
-  templateUrl: "./footer.component.html",
-  styleUrls: ["./footer.component.scss"],
+  selector: "app-stats",
+  templateUrl: "./stats.component.html",
+  styleUrls: ["./stats.component.scss"],
   standalone: true,
   imports: [CommonModule, AsyncPipe],
 })
-export class FooterComponent {
+export class StatsComponent {
   private readonly PRICE_PER_KWH = 0.85;
   private readonly KG_CO2_PER_KWH = 0.233;
 

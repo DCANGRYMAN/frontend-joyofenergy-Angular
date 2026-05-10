@@ -1,6 +1,6 @@
 import { Component, inject } from "@angular/core";
 import { ApiService } from "src/app/shared/services/api.service";
-import { FooterComponent } from "../footer/footer.component";
+import { StatsComponent } from "../stats/stats.component";
 import { SideBarComponent } from "../side-bar/side-bar.component";
 import { ChartComponent } from "../chart/chart.component";
 import { CommonModule } from "@angular/common";
@@ -10,7 +10,7 @@ import { CommonModule } from "@angular/common";
   templateUrl: "./main.component.html",
   styleUrls: ["./main.component.scss"],
   standalone: true,
-  imports: [ChartComponent, SideBarComponent, FooterComponent, CommonModule],
+  imports: [ChartComponent, SideBarComponent, StatsComponent, CommonModule],
 })
 export class MainComponent {
   api = inject(ApiService);
