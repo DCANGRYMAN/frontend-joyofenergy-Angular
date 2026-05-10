@@ -6,6 +6,15 @@ import { GROUP_BY_DAY, SORT_BY_TIME, RENDER_CHART } from "../utils/reading.token
 
 export type FilterType = "daily" | "weekly" | "monthly";
 
+export interface CurrentData {
+  current: {
+    currentUsage: number;
+    solarProduction: number;
+    fedIntoGrid: number;
+  };
+  devices: { name: string; usage: number }[];
+}
+
 @Injectable({ providedIn: "root" })
 export class ApiService {
   private http = inject(HttpClient);
@@ -16,6 +25,7 @@ export class ApiService {
 
   allReadings = signal<Data[]>([]);
   activeFilter = signal<FilterType>("monthly");
+  currentData = signal<CurrentData | null>(null); // ← novo
   grouped = new BehaviorSubject<any>(null);
 
   readonly filters: { label: string; value: FilterType }[] = [
@@ -38,6 +48,12 @@ export class ApiService {
     this.http.get<Data[]>(`${this.apiUrl}/readings`).subscribe((readings) => {
       this.allReadings.set(readings);
       this.updateChart();
+    });
+  }
+
+  loadCurrentData() {
+    this.http.get<CurrentData>(`${this.apiUrl}/data`).subscribe((data) => {
+      this.currentData.set(data);
     });
   }
 

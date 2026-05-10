@@ -1,7 +1,6 @@
 <section class="flex gap2">
   <div class="stat-card shadow-2 roundedMore p3 bg-white flex-auto">
     <p class="h6 grey mb1">Total Consumption</p>
-
     <h2 class="darkgray regular">
       {{ totalConsumption | number: "1.2-2" }}
       <span class="h4">kWh</span>
@@ -10,16 +9,14 @@
 
   <div class="stat-card shadow-2 roundedMore p3 bg-white flex-auto">
     <p class="h6 grey mb1">Estimated Cost</p>
-
     <h2 class="darkgray regular">$ {{ estimatedCost | number: "1.2-2" }}</h2>
   </div>
 
   <div class="stat-card shadow-2 roundedMore p3 bg-white flex-auto">
-    <p class="h6 grey mb1">Average Daily Consumption</p>
-
+    <p class="h6 grey mb1">Carbon Footprint</p>
     <h2 class="darkgray regular">
-      {{ averageDailyConsumption | number: "1.2-2" }}
-      <span class="h4">kWh</span>
+      {{ footprint | number: "1.2-2" }}
+      <span class="h4">kg CO₂</span>
     </h2>
   </div>
 </section>

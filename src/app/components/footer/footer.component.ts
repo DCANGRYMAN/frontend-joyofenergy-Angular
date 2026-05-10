@@ -12,7 +12,7 @@ import { ApiService } from "../../shared/services/api.service";
 export class FooterComponent {
   totalConsumption = 0;
   estimatedCost = 0;
-  averageDailyConsumption = 0;
+  footprint = 0;
 
   constructor(private api: ApiService) {
     this.api.grouped.subscribe((grouped) => {
@@ -25,7 +25,9 @@ export class FooterComponent {
 
       const pricePerKwh = 0.85;
       this.estimatedCost = this.totalConsumption * pricePerKwh;
-      this.averageDailyConsumption = this.totalConsumption / grouped.length;
+
+      const kgCo2PerKwh = 0.233;
+      this.footprint = this.totalConsumption * kgCo2PerKwh;
     });
   }
 }

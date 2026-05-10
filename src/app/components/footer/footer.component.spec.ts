@@ -45,7 +45,4 @@ describe("FooterComponent", () => {
     expect(component.estimatedCost).toBe(51);
   });
 
-  it("should calculate daily average consumption", () => {
-    expect(component.averageDailyConsumption).toBe(20);
-  });
 });
