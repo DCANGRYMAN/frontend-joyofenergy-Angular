@@ -1,4 +1,13 @@
-import { getReadings, groupByDay, sortByTime } from "./reading";
+import { groupByDay, groupByHour, sortByTime } from "./reading";
+
+const getReadings = async (length = 1200) => {
+  const current = Date.now();
+  const hour = 1000 * 60 * 60;
+  return [...new Array(length)].map((_, index) => ({
+    time: current - index * hour,
+    value: Math.random() * 0.7 + 0.4,
+  }));
+};
 
 describe("#reading", function () {
   describe("#getReadings", () => {
@@ -72,6 +81,35 @@ describe("#reading", function () {
       expect(
         groupedReadings.find(
           (reading) => reading.time === new Date(2021, 12, 16).getTime()
+        ).value
+      ).toBe(35);
+    });
+  });
+
+  describe("#groupedByHour", () => {
+    it("should get readings grouped by hour", () => {
+      const readings = [
+        { time: new Date(2021, 12, 17, 10, 24).getTime(), value: 50 },
+        {
+          time: new Date(2021, 12, 17, 10, 30).getTime(),
+          value: 40,
+        },
+        {
+          time: new Date(2021, 12, 17, 9, 34).getTime(),
+          value: 35,
+        },
+      ];
+
+      const groupedReadings = groupByHour(readings);
+      expect(groupedReadings).toHaveLength(2);
+      expect(
+        groupedReadings.find(
+          (reading) => reading.time === new Date(2021, 12, 17, 10).getTime()
+        ).value
+      ).toBe(90);
+      expect(
+        groupedReadings.find(
+          (reading) => reading.time === new Date(2021, 12, 17, 9).getTime()
         ).value
       ).toBe(35);
     });

@@ -1,11 +1,3 @@
-export const getReadings = async (length = 1200) => {
-  const current = Date.now();
-  const hour = 1000 * 60 * 60;
-  return [...new Array(length)].map((_, index) => ({
-    time: current - index * hour,
-    value: Math.random() * 0.7 + 0.4,
-  }));
-};
 
 export const groupByDay = (readings) => {
   const groupedByDay = readings.reduce((curr, { time, value }) => {
@@ -22,6 +14,26 @@ export const groupByDay = (readings) => {
 
   return Object.entries(groupedByDay).map(([day, value]) => ({
     time: Number(day),
+    value,
+  }));
+};
+
+export const groupByHour = (readings) => {
+  const groupedByHour = readings.reduce((curr, { time, value }) => {
+    const readingDate = new Date(time);
+    const hour = new Date(
+      readingDate.getFullYear(),
+      readingDate.getMonth(),
+      readingDate.getDate(),
+      readingDate.getHours()
+    ).getTime();
+    if (!curr[hour]) curr[hour] = 0;
+    curr[hour] += value;
+    return curr;
+  }, {});
+
+  return Object.entries(groupedByHour).map(([hour, value]) => ({
+    time: Number(hour),
     value,
   }));
 };

@@ -1,10 +1,15 @@
 import { InjectionToken } from "@angular/core";
-import { groupByDay, sortByTime } from "./reading";
+import { groupByDay, groupByHour, sortByTime } from "./reading";
 import { renderChart } from "./chart";
 
 export const GROUP_BY_DAY = new InjectionToken<typeof groupByDay>('groupByDay', {
   providedIn: 'root',
   factory: () => groupByDay,
+});
+
+export const GROUP_BY_HOUR = new InjectionToken<typeof groupByHour>('groupByHour', {
+  providedIn: 'root',
+  factory: () => groupByHour,
 });
 
 export const SORT_BY_TIME = new InjectionToken<typeof sortByTime>('sortByTime', {

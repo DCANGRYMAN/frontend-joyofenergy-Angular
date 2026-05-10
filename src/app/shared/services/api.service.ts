@@ -2,7 +2,7 @@ import { Injectable, inject, signal, computed } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject } from "rxjs";
 import { Data } from "../models/dataModel";
-import { GROUP_BY_DAY, SORT_BY_TIME, RENDER_CHART } from "../utils/reading.tokens";
+import { GROUP_BY_DAY, GROUP_BY_HOUR, SORT_BY_TIME, RENDER_CHART } from "../utils/reading.tokens";
 
 export type FilterType = "daily" | "weekly" | "monthly";
 
@@ -19,6 +19,7 @@ export interface CurrentData {
 export class ApiService {
   private http = inject(HttpClient);
   private groupByDay = inject(GROUP_BY_DAY);
+  private groupByHour = inject(GROUP_BY_HOUR);
   private sortByTime = inject(SORT_BY_TIME);
   private renderChart = inject(RENDER_CHART);
   private apiUrl = "http://localhost:3000";
@@ -35,13 +36,21 @@ export class ApiService {
   ];
 
   filteredData = computed(() => {
-    const grouped = this.sortByTime(this.groupByDay(this.allReadings()));
+    const filter = this.activeFilter();
+    let grouped: Data[];
+    
+    if (filter === "daily") {
+      grouped = this.sortByTime(this.groupByHour(this.allReadings()));
+    } else {
+      grouped = this.sortByTime(this.groupByDay(this.allReadings()));
+    }
+    
     const sliceMap: Record<FilterType, number> = {
-      daily: 1,
+      daily: 24,
       weekly: 7,
       monthly: 30,
     };
-    return grouped.slice(-sliceMap[this.activeFilter()]);
+    return grouped.slice(-sliceMap[filter]);
   });
 
   loadReadings() {
@@ -63,7 +72,8 @@ export class ApiService {
   }
 
   private updateChart() {
+    const isHourly = this.activeFilter() === "daily";
     this.grouped.next(this.filteredData());
-    this.renderChart("chart", this.filteredData());
+    this.renderChart("chart", this.filteredData(), isHourly);
   }
 }
