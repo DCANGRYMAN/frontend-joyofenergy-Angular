@@ -1,33 +1,32 @@
-import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { CommonModule, AsyncPipe } from "@angular/common";
+import { Component, inject } from "@angular/core";
 import { ApiService } from "../../shared/services/api.service";
+import { map } from "rxjs/operators";
 
 @Component({
   selector: "app-footer",
   templateUrl: "./footer.component.html",
   styleUrls: ["./footer.component.scss"],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AsyncPipe],
 })
 export class FooterComponent {
-  totalConsumption = 0;
-  estimatedCost = 0;
-  footprint = 0;
+  private readonly PRICE_PER_KWH = 0.85;
+  private readonly KG_CO2_PER_KWH = 0.233;
 
-  constructor(private api: ApiService) {
-    this.api.grouped.subscribe((grouped) => {
-      if (!grouped) return;
+  private readonly api = inject(ApiService);
 
-      this.totalConsumption = grouped.reduce(
-        (sum, item) => sum + item.value,
-        0
-      );
+  readonly stats$ = this.api.grouped.pipe(
+    map((grouped) => {
+      if (!grouped) return null;
 
-      const pricePerKwh = 0.85;
-      this.estimatedCost = this.totalConsumption * pricePerKwh;
+      const totalConsumption = grouped.reduce((sum, item) => sum + item.value, 0);
 
-      const kgCo2PerKwh = 0.233;
-      this.footprint = this.totalConsumption * kgCo2PerKwh;
-    });
-  }
+      return {
+        totalConsumption,
+        estimatedCost: totalConsumption * this.PRICE_PER_KWH,
+        footprint: totalConsumption * this.KG_CO2_PER_KWH,
+      };
+    })
+  );
 }

@@ -37,12 +37,34 @@ describe("FooterComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  it("should calculate total consumption", () => {
-    expect(component.totalConsumption).toBe(60);
+  it("should calculate stats from grouped data", (done) => {
+    component.stats$.subscribe((stats) => {
+      expect(stats).not.toBeNull();
+      expect(stats!.totalConsumption).toBe(60);
+      expect(stats!.estimatedCost).toBeCloseTo(51, 2);
+      expect(stats!.footprint).toBeCloseTo(13.98, 2);
+      done();
+    });
   });
 
-  it("should calculate estimated cost", () => {
-    expect(component.estimatedCost).toBe(51);
+  it("should return null when grouped is null", (done) => {
+    apiServiceMock.grouped.next(null as any);
+
+    component.stats$.subscribe((stats) => {
+      expect(stats).toBeNull();
+      done();
+    });
   });
 
+  it("should recalculate when grouped data changes", (done) => {
+    const newData = [{ time: 4, value: 100 }];
+    apiServiceMock.grouped.next(newData);
+
+    component.stats$.subscribe((stats) => {
+      expect(stats!.totalConsumption).toBe(100);
+      expect(stats!.estimatedCost).toBeCloseTo(85, 2);
+      expect(stats!.footprint).toBeCloseTo(23.3, 2);
+      done();
+    });
+  });
 });
