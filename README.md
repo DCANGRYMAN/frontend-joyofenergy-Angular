@@ -1,6 +1,6 @@
 # Angular Frontend - Joy of Energy
 
-Built with Angular 21.
+Built with Angular 20.
 
 ---
 
@@ -58,8 +58,8 @@ ng e2e
 ## Architecture Overview
 
 ### Framework Upgrade
-- Angular 14 → **Angular 21**
-- Updated builders to Angular 21 standards
+- Angular 14 → **Angular 20**
+- Updated builders to Angular 20 standards
 - Modernized configuration files (angular.json, tsconfig.json, tsconfig.spec.json)
 
 ### Standalone Components
