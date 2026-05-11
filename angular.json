@@ -15,23 +15,16 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/angular-frontend-developer-joyofenergy",
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "browser": "src/main.ts",
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss",
-              "src/index.scss",
-              "src/basscss.scss"       
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss", "src/index.scss", "src/basscss.scss"],
             "scripts": []
           },
           "configurations": {
@@ -57,12 +50,9 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "extractLicenses": false
             }
           },
           "defaultConfiguration": "production"
@@ -71,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular-frontend-developer-joyofenergy:build:production"
+              "buildTarget": "angular-frontend-developer-joyofenergy:build:production"
             },
             "development": {
-              "browserTarget": "angular-frontend-developer-joyofenergy:build:development"
+              "buildTarget": "angular-frontend-developer-joyofenergy:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,27 +72,20 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-frontend-developer-joyofenergy:build"
+            "buildTarget": "angular-frontend-developer-joyofenergy:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [ 
-              "src/styles.scss",
-              "src/index.scss",
-              "src/basscss.scss"
-            ],
-            "scripts": []
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss", "src/index.scss", "src/basscss.scss"],
+            "scripts": [],
+            "codeCoverage": true
           }
         }
       }

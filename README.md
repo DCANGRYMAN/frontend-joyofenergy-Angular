@@ -1,27 +1,137 @@
-# AngularFrontendDeveloperJoyofenergy
+# Angular Frontend - Joy of Energy
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.1.
+Built with Angular 20.
 
-## Development server
+---
 
-Run `npm install` `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Quick Start
 
-## Code scaffolding
+### Prerequisites
+- Node.js and npm installed
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Installation
+```bash
+npm install
+```
 
-## Build
+### Development Setup (Two Terminals)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+**Terminal 1 - Mock Server:**
+```bash
+npm run server
+```
+Runs on `http://localhost:3000`
 
-## Running unit tests
+**Terminal 2 - Angular App:**
+```bash
+ng serve
+```
+Navigate to `http://localhost:4200` — app reloads automatically on file changes.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## Build & Deployment
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Production Build
+```bash
+ng build
+```
+Build artifacts will be stored in the `dist/` directory.
 
-## Further help
+---
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Testing
+
+### Unit Tests
+```bash
+ng test
+```
+Runs Karma with code coverage reporting.
+
+### End-to-End Tests
+```bash
+ng e2e
+```
+
+---
+
+## Architecture Overview
+
+### Framework Upgrade
+- Angular 14 → **Angular 20**
+- Updated builders to Angular 20 standards
+- Modernized configuration files (angular.json, tsconfig.json, tsconfig.spec.json)
+
+### Standalone Components
+- All components migrated to standalone pattern
+- No NgModule dependencies
+- HttpClient provided via `provideHttpClient()`
+- **Components:**
+  - AppComponent
+  - MainComponent
+  - ChartComponent
+  - FooterComponent
+  - SideBarComponent
+
+### Reactivity with Signals
+- `allReadings` — reactive signal for all data
+- `activeFilter` — tracks current filter state (daily/weekly/monthly)
+- `filteredData` — computed signal that auto-reacts to filter and data changes
+- No manual change detection needed
+
+### Service-Oriented Architecture
+**ApiService owns:**
+- Data fetching from backend
+- Filter state management
+- Chart rendering logic
+- Grouped data emission
+- Current device data
+
+**MainComponent handles:**
+- Presentation only
+- User interactions (filter clicks)
+
+### Dependency Injection with Tokens
+All utility functions use `InjectionToken` for proper mocking in tests:
+- `GROUP_BY_DAY` — groups readings by calendar day
+- `GROUP_BY_HOUR` — groups readings by hour (for daily view)
+- `SORT_BY_TIME` — sorts chronologically
+- `RENDER_CHART` — renders Chart.js visualization
+
+---
+
+## Features
+
+### Data Visualization
+- **Daily:** Hourly breakdown (24 bars)
+- **Weekly:** Daily breakdown (7 bars)
+- **Monthly:** Daily breakdown (30 bars)
+
+### Statistics
+- Total consumption (kWh)
+- Estimated cost ($)
+- Carbon footprint (kg CO₂)
+
+### Current Data
+- Real-time power draw
+- Solar production
+- Grid feed-in amount
+- Device usage breakdown
+
+---
+
+## Code Scaffolding
+
+Generate new components:
+```bash
+ng generate component component-name
+ng generate service|directive|pipe|guard|interface|enum
+```
+
+---
+
+## Further Help
+
+- [Angular CLI docs](https://angular.dev/cli)
+- `ng help` command
+- [Angular Official Docs](https://angular.dev)

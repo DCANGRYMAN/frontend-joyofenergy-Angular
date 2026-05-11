@@ -1,27 +1,29 @@
 <div class="p3 menuWidth overflow-auto">
-  <div
-    class="energy-card"
-    *ngFor="let energyField of energyConsumptionMap | keyvalue: asIsOrder"
-  >
-    <div class="h2 greyBlue">
-      {{ energyField.key }}
+  <ng-container *ngIf="current() as c">
+    <div class="energy-card">
+      <div class="h2 greyBlue">⚡️ {{ c.currentUsage.toFixed(2) }}kW</div>
+      <div class="darkgray mb2">Power draw</div>
     </div>
-    <div class="darkgray mb2">
-      {{ energyField.value }}
+    <div class="energy-card">
+      <div class="h2 greyBlue">☀️️ {{ c.solarProduction.toFixed(2) }}kW</div>
+      <div class="darkgray mb2">Solar power production</div>
     </div>
-  </div>
+    <div class="energy-card">
+      <div class="h2 greyBlue">🔌️ {{ c.fedIntoGrid.toFixed(2) }}kW</div>
+      <div class="darkgray mb2">Fed into grid</div>
+    </div>
+  </ng-container>
+
   <section class="h5 darkgray mb2">
-
-
-  <h4 class="h4 mb1">Your devices:</h4>
-  <div
-    class="shadow-2 roundedMore bg-super-light-grey mb1"
-    *ngFor="let device of devicesMap | keyvalue"
-  >
-    <p class="darkgray pl2 pt1 pb1">{{ device.key }}</p>
-    <p class="h5 darkgray bold pl2 pb1 pt1 bg-very-light-grey">
-      {{ device.value }}
-    </p>
-  </div>
-</section>
+    <h4 class="h4 mb1">Your devices:</h4>
+    <div
+      class="shadow-2 roundedMore bg-super-light-grey mb1"
+      *ngFor="let device of devices()"
+    >
+      <p class="darkgray pl2 pt1 pb1">{{ device.name }}</p>
+      <p class="h5 darkgray bold pl2 pb1 pt1 bg-very-light-grey">
+        {{ device.usage.toFixed(4) }}kW
+      </p>
+    </div>
+  </section>
 </div>
