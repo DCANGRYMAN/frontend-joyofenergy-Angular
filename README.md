@@ -2,57 +2,136 @@
 
 Built with Angular 21.
 
-## Getting Started
+---
 
-### Install dependencies
+## Quick Start
+
+### Prerequisites
+- Node.js and npm installed
+
+### Installation
 ```bash
 npm install
 ```
 
-### Run the mock server
+### Development Setup (Two Terminals)
+
+**Terminal 1 - Mock Server:**
 ```bash
 npm run server
 ```
-> Runs on `http://localhost:3000`
+Runs on `http://localhost:3000`
 
-### Run the app
+**Terminal 2 - Angular App:**
 ```bash
 ng serve
 ```
-> Navigate to `http://localhost:4200` — the app reloads automatically on file changes.
-
-### Run both simultaneously
-Open two terminals and run each command separately.
+Navigate to `http://localhost:4200` — app reloads automatically on file changes.
 
 ---
 
-## Build
+## Build & Deployment
 
+### Production Build
 ```bash
 ng build
 ```
 Build artifacts will be stored in the `dist/` directory.
 
-## Code scaffolding
+---
 
+## Testing
+
+### Unit Tests
 ```bash
-ng generate component component-name
-ng generate service|directive|pipe|guard|interface|enum
-```
-
-## Tests
-
-```bash
-# Unit tests
 ng test
+```
+Runs Karma with code coverage reporting.
 
-# End-to-end tests
+### End-to-End Tests
+```bash
 ng e2e
 ```
 
 ---
 
-## Further help
+## Architecture Overview
+
+### Framework Upgrade
+- Angular 14 → **Angular 21**
+- Updated builders to Angular 21 standards
+- Modernized configuration files (angular.json, tsconfig.json, tsconfig.spec.json)
+
+### Standalone Components
+- All components migrated to standalone pattern
+- No NgModule dependencies
+- HttpClient provided via `provideHttpClient()`
+- **Components:**
+  - AppComponent
+  - MainComponent
+  - ChartComponent
+  - FooterComponent
+  - SideBarComponent
+
+### Reactivity with Signals
+- `allReadings` — reactive signal for all data
+- `activeFilter` — tracks current filter state (daily/weekly/monthly)
+- `filteredData` — computed signal that auto-reacts to filter and data changes
+- No manual change detection needed
+
+### Service-Oriented Architecture
+**ApiService owns:**
+- Data fetching from backend
+- Filter state management
+- Chart rendering logic
+- Grouped data emission
+- Current device data
+
+**MainComponent handles:**
+- Presentation only
+- User interactions (filter clicks)
+
+### Dependency Injection with Tokens
+All utility functions use `InjectionToken` for proper mocking in tests:
+- `GROUP_BY_DAY` — groups readings by calendar day
+- `GROUP_BY_HOUR` — groups readings by hour (for daily view)
+- `SORT_BY_TIME` — sorts chronologically
+- `RENDER_CHART` — renders Chart.js visualization
+
+---
+
+## Features
+
+### Data Visualization
+- **Daily:** Hourly breakdown (24 bars)
+- **Weekly:** Daily breakdown (7 bars)
+- **Monthly:** Daily breakdown (30 bars)
+
+### Statistics
+- Total consumption (kWh)
+- Estimated cost ($)
+- Carbon footprint (kg CO₂)
+
+### Current Data
+- Real-time power draw
+- Solar production
+- Grid feed-in amount
+- Device usage breakdown
+
+---
+
+## Code Scaffolding
+
+Generate new components:
+```bash
+ng generate component component-name
+ng generate service|directive|pipe|guard|interface|enum
+```
+
+---
+
+## Further Help
 
 - [Angular CLI docs](https://angular.dev/cli)
-- `ng help`
+- `ng help` command
+- [Angular Official Docs](https://angular.dev)
